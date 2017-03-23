@@ -37,6 +37,9 @@ export default class App extends Component {
           style = {styles.ageInput}
           returnKeyType = 'go'
           onSubmitEditing={this._handleTextChange}
+          keyboardType = 'numeric'
+          placeholder = "Enter Age"
+          autoFocus={true}
           />
           {content}
         </View>
