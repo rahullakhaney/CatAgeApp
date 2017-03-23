@@ -15,7 +15,7 @@ export default class App extends Component {
    this.state = { age: '' };
   }
 
-  _handleTextChange() {
+  _handleTextChange = (event) => {
     var age = event.nativeEvent.text;
     this.setState({age: age});
   }
