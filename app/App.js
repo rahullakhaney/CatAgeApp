@@ -13,11 +13,16 @@ export default class App extends Component {
   constructor(props) {
    super(props);
    this.state = { age: '' };
-  }
+ }
 
   _handleTextChange = (event) => {
     var age = event.nativeEvent.text;
     this.setState({age: age});
+  }
+
+  _resetAgeInput = (event) => {
+    this._ageInput.setNativeProps({text: ''});
+    this.setState({age: ''});
   }
 
   render() {
@@ -34,11 +39,13 @@ export default class App extends Component {
           <Text style = {styles.Heading}>Cat Age Calculator</Text>
           <Text style = {styles.SubHeading}>Enter your age</Text>
           <TextInput
+          ref={component => this._ageInput = component}
           style = {styles.ageInput}
           returnKeyType = 'go'
           onSubmitEditing={this._handleTextChange}
           keyboardType = 'numeric'
           placeholder = "Enter Age"
+          onFocus={this._resetAgeInput}
           autoFocus={true}
           />
           {content}
