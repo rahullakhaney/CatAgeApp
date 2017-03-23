@@ -9,7 +9,25 @@ import {
 import ViewContainer from './components/ViewContainer'
 
 export default class App extends Component {
+
+  constructor(props) {
+   super(props);
+   this.state = { age: '' };
+  }
+
+  _handleTextChange() {
+    var age = event.nativeEvent.text;
+    this.setState({age: age});
+  }
+
   render() {
+    var content = null;
+    if (this.state.age != '') {
+      content = <Text style = {styles.ageResult}>Your age in Cat Years is: {this.state.age * 7}</Text>
+    } else {
+      content = <Text style = {styles.instructions}>Your age in cat years will be displayed here</Text>
+    }
+
     return (
       <ViewContainer>
         <View style = {styles.Container}>
@@ -17,7 +35,10 @@ export default class App extends Component {
           <Text style = {styles.SubHeading}>Enter your age</Text>
           <TextInput
           style = {styles.ageInput}
+          returnKeyType = 'go'
+          onSubmitEditing={this._handleTextChange}
           />
+          {content}
         </View>
       </ViewContainer>
     );
@@ -66,5 +87,13 @@ const styles = StyleSheet.create({
     padding: 4,
     margin: 10,
     marginTop: 20
+  },
+  instructions: {
+    fontFamily: ParentFont,
+    fontSize: 14,
+    textAlign: 'center',
+    color: 'black',
+    marginBottom: 5,
+    marginTop: 5
   }
 })
